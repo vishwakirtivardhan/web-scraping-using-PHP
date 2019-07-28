@@ -1,6 +1,12 @@
 <html>
 	<head>
-		<title>C-project</title>
+<meta>
+This PHP code is used for the web-scraping from the simple input box. you have to enter the url of any website it show H1 
+heading and title of the page.
+But .net website cannot work the title and heading.
+
+</meta>
+		<title>C-project()</title>
 	</head>
 <body>
 	<h1 class="display1 text-center text-dark">Check page Title and H1 heading of any link</h1>
