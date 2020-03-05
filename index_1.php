@@ -1,34 +1,3 @@
-<html>
-    <head>
-        <title>C-project</title>
-        <!-- This is the bootstrap links--->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-        <!--end of Boostrap links-->
-    	<style type="text/css">
-    		.btn{
-    			font-size: 30px;
-    		}
-    	</style>
-    </head>
-    <body>
-        <h1 class="display1 text-center text-dark">Check your Website Performance</h1>
-        <div class="container mt-5">
-            <form action="index_1.php" method="POST">
-
-                <input type="url" name="url" placeholder="Enter Url and check title and headings" class="form-control w-100 text-center" required="" />
-                <br>
-                <input type="submit" name="submit" class="btn btn-success" style="margin-left: 500px;">
-
-            </form>
-        </div>
-    </body>
-
-</html>
-
-
 <?php
 if (isset($_POST['submit'])) {// submit btn
 
@@ -71,15 +40,50 @@ $links= $DOM->getElementsByTagName('link');
        $items_linksrel[] = $metatri->getAttribute('rel'); 
       
     }
-    
-    
-    
+  }  
+?>
 
-    for ($i = 0; $i < $element->length; $i++) {
+
+<html>
+    <head>
+        <title>C-project</title>
+        <!-- This is the bootstrap links--->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+        <!--end of Boostrap links-->
+    	<style type="text/css">
+    		.btn{
+    			font-size: 30px;
+    		}
+    	</style>
+    </head>
+    <body>
+        <h1 class="display1 text-center text-dark">Check your Website Performance</h1>
+        <div class="container mt-5">
+            <form action="index_1.php" method="POST">
+
+                <input type="url" name="url" placeholder="Enter Url and check title and headings" class="form-control w-100 text-center" required="" />
+                <br>
+                <input type="submit" name="submit" class="btn btn-success" style="margin-left: 500px;">
+
+            </form>
+        </div>
+
+
+
+<?php 
+
+if ($element->length > 0) {
+	for ($i = 0; $i < $element->length; $i++) {
 
         echo "<div class='container bg-light w-100'><h3 class='display3 text-center'>Title of the page :-  " . $element->item($i)->nodeValue . "</h3></div>";
     }
-?>
+}
+
+ ?>
+
 
 <div class="accordion" id="accordionExample">
   <?php if($element1->length >0){ ?>
@@ -207,7 +211,7 @@ $links= $DOM->getElementsByTagName('link');
     </div>
   </div>
 <?php } ?>
-
+<?php if($len > 0 ){ ?>
 <div class="card">
     <div class="card-header" id="headingseven">
       <h2 class="mb-0 text-center">
@@ -250,7 +254,11 @@ $links= $DOM->getElementsByTagName('link');
       </div>
     </div>
   </div>
-
+  <?php 
+}
+$len_links=count($items_links);
+if($len_links > 0){
+   ?>
    <div class="card">
     <div class="card-header" id="headingsix">
       <h2 class="mb-0 text-center">
@@ -274,47 +282,38 @@ $links= $DOM->getElementsByTagName('link');
       </div>
     </div>
   </div>
-
+<?php } ?>
 </div>
 
+        <!-- Footer -->
+<footer class="page-footer font-small unique-color-dark pt-4">
 
-<?php
-    
-    
-//     $altextVolume=0;
-//     $altarray=[];
-//     $arraylen=0;
-//     for ($i = 0; $i < $len; $i++){
-// //         echo ' <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-// //     Images '.$i.'
-// //   </button>
-// // </p>
-// // <div class="collapse" id="collapseExample">
-// //   <div class="card card-body">'
-// //         . $items[$i].'
-// //   </div>
-// // </div>';
+  <!-- Footer Elements -->
+  <div class="container">
 
-//     	if($items[$i] == ''){
-//     		$altextVolume++;
-//     	}
-//     	else{
-//     		$altarray[$arraylen]=$items[$i];
-//     		$arraylen++;
-//     	}
-        
-//         //echo "<div class='container bg-light w-100'><h3 class='display3 text-center'>Images Alt Info :-  " . $element6->item(0)->nodeValue . "</h3></div>";
-//     }
+    <!-- Call to action -->
+    <ul class="list-unstyled list-inline text-center py-2">
+      <li class="list-inline-item">
+        <h5 class="mb-1">Support Developer</h5>
+      </li>
+      <li class="list-inline-item">
+        <a href="#!" class="btn btn-outline-white btn-rounded">Sign up!</a>
+      </li>
+    </ul>
+    <!-- Call to action -->
 
-//     if($altextVolume > 0){
-//     echo  'Total number of alt attribute Missing in the Image'.$altextVolume;
-//     }
-//     $lenghtaltarray=count($altarray);
-//     for($i=0;$i < $lenghtaltarray;$i++){
+  </div>
+  <!-- Footer Elements -->
 
-//     	echo "<div class='container bg-light w-100'><h3 class='display3 '>Image alt attribute".".".$i." :-  " . $altarray[$i] . "</h3></div>";
+  <!-- Copyright -->
+  <div class="footer-copyright text-center py-3">© 2020 Copyright:
+    <a href="https://mdbootstrap.com/"> Vishwakirti.Website</a>
+  </div>
+  <!-- Copyright -->
 
-//     }
-}
+</footer>
+<!-- Footer -->
+    </body>
 
-?>
+</html>
+
