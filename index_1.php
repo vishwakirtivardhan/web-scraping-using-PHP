@@ -256,40 +256,40 @@ if (isset($_POST['submit'])) {// submit btn
 <?php
     
     
-    $altextVolume=0;
-    $altarray=[];
-    $arraylen=0;
-    for ($i = 0; $i < $len; $i++){
-//         echo ' <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-//     Images '.$i.'
-//   </button>
-// </p>
-// <div class="collapse" id="collapseExample">
-//   <div class="card card-body">'
-//         . $items[$i].'
-//   </div>
-// </div>';
+//     $altextVolume=0;
+//     $altarray=[];
+//     $arraylen=0;
+//     for ($i = 0; $i < $len; $i++){
+// //         echo ' <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+// //     Images '.$i.'
+// //   </button>
+// // </p>
+// // <div class="collapse" id="collapseExample">
+// //   <div class="card card-body">'
+// //         . $items[$i].'
+// //   </div>
+// // </div>';
 
-    	if($items[$i] == ''){
-    		$altextVolume++;
-    	}
-    	else{
-    		$altarray[$arraylen]=$items[$i];
-    		$arraylen++;
-    	}
+//     	if($items[$i] == ''){
+//     		$altextVolume++;
+//     	}
+//     	else{
+//     		$altarray[$arraylen]=$items[$i];
+//     		$arraylen++;
+//     	}
         
-        //echo "<div class='container bg-light w-100'><h3 class='display3 text-center'>Images Alt Info :-  " . $element6->item(0)->nodeValue . "</h3></div>";
-    }
+//         //echo "<div class='container bg-light w-100'><h3 class='display3 text-center'>Images Alt Info :-  " . $element6->item(0)->nodeValue . "</h3></div>";
+//     }
 
-    if($altextVolume > 0){
-    echo  'Total number of alt attribute Missing in the Image'.$altextVolume;
-    }
-    $lenghtaltarray=count($altarray);
-    for($i=0;$i < $lenghtaltarray;$i++){
+//     if($altextVolume > 0){
+//     echo  'Total number of alt attribute Missing in the Image'.$altextVolume;
+//     }
+//     $lenghtaltarray=count($altarray);
+//     for($i=0;$i < $lenghtaltarray;$i++){
 
-    	echo "<div class='container bg-light w-100'><h3 class='display3 '>Image alt attribute".".".$i." :-  " . $altarray[$i] . "</h3></div>";
+//     	echo "<div class='container bg-light w-100'><h3 class='display3 '>Image alt attribute".".".$i." :-  " . $altarray[$i] . "</h3></div>";
 
-    }
+//     }
 }
 
 ?>
