@@ -7,9 +7,14 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
         <!--end of Boostrap links-->
+    	<style type="text/css">
+    		.btn{
+    			font-size: 30px;
+    		}
+    	</style>
     </head>
     <body>
-        <h1 class="display1 text-center text-dark">Check page Title and H1 heading of any link</h1>
+        <h1 class="display1 text-center text-dark">Check your Website Performance</h1>
         <div class="container mt-5">
             <form action="index_1.php" method="POST">
 
@@ -58,20 +63,16 @@ if (isset($_POST['submit'])) {// submit btn
     $len=count($items);
 
 
-// $links= $DOM->getElementsByTagName('link');
-//     $items_links = array();
-//     foreach($links as $metatri){
+$links= $DOM->getElementsByTagName('link');
+    $items_links = array();
+    foreach($links as $metatri){
         
-//        $items_links[] = $metatri->getAttribute('href'); 
+       $items_links[] = $metatri->getAttribute('href'); 
+       $items_linksrel[] = $metatri->getAttribute('rel'); 
       
-//     }
-    //$len_links=count($items);
-    //print_r($items_links);
+    }
     
-    // for ($i = 0; $i < $len_links; $i++) {
-
-    //     echo "<div class='container bg-light w-100'><h3 class='display3 text-center'>".$i." Links rel Tags :-  " . $items_links[$i] . "</h3></div>";
-    // }
+    
     
 
     for ($i = 0; $i < $element->length; $i++) {
@@ -107,7 +108,7 @@ if (isset($_POST['submit'])) {// submit btn
 <?php } if($element2->length >0){ ?>
   <div class="card">
     <div class="card-header" id="headingTwo">
-      <h2 class="mb-0">
+      <h2 class="mb-0 text-center">
         <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
         	Heading 2
         </button>
@@ -127,7 +128,7 @@ if (isset($_POST['submit'])) {// submit btn
 <?php } if($element3->length >0){ ?>
   <div class="card">
     <div class="card-header" id="headingThree">
-      <h2 class="mb-0">
+      <h2 class="mb-0 text-center">
         <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
         	Heading 3
         </button>
@@ -148,7 +149,7 @@ if (isset($_POST['submit'])) {// submit btn
 <?php } if($element4->length >0){ ?>
   <div class="card">
     <div class="card-header" id="headingfour">
-      <h2 class="mb-0">
+      <h2 class="mb-0 text-center">
         <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#headingfour" aria-expanded="false" aria-controls="headingfour">
         	Heading 4
         </button>
@@ -168,7 +169,7 @@ if (isset($_POST['submit'])) {// submit btn
 <?php }  if($element5->length >0){ ?>
   <div class="card">
     <div class="card-header" id="headingfive">
-      <h2 class="mb-0">
+      <h2 class="mb-0 text-center">
         <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#headingfive" aria-expanded="false" aria-controls="headingfive">
         	Heading 5
         </button>
@@ -188,7 +189,7 @@ if (isset($_POST['submit'])) {// submit btn
   <?php } if($element6->length >0){ ?>
   <div class="card">
     <div class="card-header" id="headingsix">
-      <h2 class="mb-0">
+      <h2 class="mb-0 text-center">
         <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#headingsix" aria-expanded="false" aria-controls="headingsix">
         	Heading 6
         </button>
@@ -209,7 +210,7 @@ if (isset($_POST['submit'])) {// submit btn
 
 <div class="card">
     <div class="card-header" id="headingseven">
-      <h2 class="mb-0">
+      <h2 class="mb-0 text-center">
         <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#headingseven" aria-expanded="false" aria-controls="headingseven">
         	Alt Images Analysis
         </button>
@@ -244,6 +245,30 @@ if (isset($_POST['submit'])) {// submit btn
 
     	echo "<div class='container bg-light w-100'><h3 class='display3 '>Image alt attribute".".".$i." :-  " . $altarray[$i] . "</h3></div>";
 
+    }
+        ?>
+      </div>
+    </div>
+  </div>
+
+   <div class="card">
+    <div class="card-header" id="headingsix">
+      <h2 class="mb-0 text-center">
+        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#headingsix" aria-expanded="false" aria-controls="headingsix">
+        	Total Number of the External Links
+        </button>
+      </h2>
+    </div>
+    <div id="headingsix" class="collapse" aria-labelledby="headingsix" data-parent="#accordionExample">
+      <div class="card-body">
+        <?php
+           $len_links=count($items_links);
+           $len_linksrel= count($items_linksrel);
+    //print_r($items_links);
+    
+    for ($i = 0; $i < $len_links; $i++) {
+
+        echo "<div class='container bg-light w-100'><h3 class='display3 '>".$i." Links rel Tags :-  " . $items_links[$i] . " <p><strong> Type</strong> :-".$items_linksrel[$i]." </p></h3></div>";
     }
         ?>
       </div>
