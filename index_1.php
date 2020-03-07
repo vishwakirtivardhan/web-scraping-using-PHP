@@ -1,7 +1,17 @@
 <?php
 if (isset($_POST['submit'])) {// submit btn
 
-    $link = $_POST['url']; //text box links
+$link = $_POST['url'];
+	
+//	$url = 'facebook.com';        
+$curl = curl_init($link);       
+curl_setopt($curl, CURLOPT_RETURNTRANSFER, TRUE);    
+$subject = curl_exec($curl);
+curl_setopt($curl, CURLOPT_FOLLOWLOCATION, true);  
+print("File-size : " . curl_getinfo($curl, CURLINFO_SIZE_DOWNLOAD) .'<br>');
+curl_close($curl);
+
+     //text box links
     $ch = curl_init();
     curl_setopt($ch, CURLOPT_URL, $link);
     curl_setopt($ch, CURLOPT_POST, false);
