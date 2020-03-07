@@ -2,6 +2,26 @@
 if (isset($_POST['submit'])) {// submit btn
 
 $link = $_POST['url'];
+
+$headers=get_headers("$link");
+print_r($headers);
+die();
+
+$image_info = getimagesize("https://theperch.s3.amazonaws.com/2019-11-04_16-34-55.jpg"); 
+//print_r($image_info); 
+
+
+$file_size = filesize($_SERVER['DOCUMENT_ROOT']."https://theperch.s3.amazonaws.com/2019-11-04_16-34-55.jpg"); // Get file size in bytes
+$file_size = $file_size / 1024; // Get file size in KB
+//echo $file_size; // Echo file size
+
+$headers=get_headers("https://theperch.s3.amazonaws.com/2019-10-23_18-04.jpg");
+print_r($headers);
+
+
+
+
+
 	
 //	$url = 'facebook.com';        
 $curl = curl_init($link);       
@@ -33,13 +53,15 @@ curl_close($curl);
     $element5 = $DOM->getElementsByTagName('h5');
     $element6 = $DOM->getElementsByTagName('h6');
     $meta = $DOM->getElementsByTagName('img');
+    
     $items = array();
+    $img_url=array();
     foreach($meta as $metatri){
         
        $items[] = $metatri->getAttribute('alt'); 
-      
+      $img_url[]= $metatri->getAttribute('src');
     }    
-    $len=count($items);
+    $len=count($img_url);
 
 
 $links= $DOM->getElementsByTagName('link');
@@ -233,8 +255,7 @@ if ($element->length > 0) {
     <div id="headingseven" class="collapse" aria-labelledby="headingseven" data-parent="#accordionExample">
       <div class="card-body">
         <?php
-
-         $altextVolume=0;
+    $altextVolume=0;
     $altarray=[];
     $arraylen=0;
     for ($i = 0; $i < $len; $i++){
@@ -258,6 +279,14 @@ if ($element->length > 0) {
     for($i=0;$i < $lenghtaltarray;$i++){
 
     	echo "<div class='container bg-light w-100'><h3 class='display3 '>Image alt attribute".".".$i." :-  " . $altarray[$i] . "</h3></div>";
+
+    }
+
+    $imgLenUrl=count($img_url);
+    for($i=0;$i < $imgLenUrl;$i++){
+
+    
+    	echo "<div class='container bg-light w-100'><h3 class='display3 '>Image SRC attribute".".".$i." :-  " . $img_url[$i] . "</h3></div>";
 
     }
         ?>
