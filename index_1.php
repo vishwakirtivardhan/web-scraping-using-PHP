@@ -1,6 +1,7 @@
 <?php
 if (isset($_POST['submit'])) {// submit btn
 
+
 $link = $_POST['url'];
 
 $headers=get_headers("$link");
@@ -8,14 +9,12 @@ $headers=get_headers("$link");
 
 $image_info = getimagesize("https://theperch.s3.amazonaws.com/2019-11-04_16-34-55.jpg"); 
 //print_r($image_info); 
-
 //$file_size = filesize($_SERVER['DOCUMENT_ROOT']."https://theperch.s3.amazonaws.com/2019-11-04_16-34-55.jpg"); // Get file size in bytes
 //$file_size = $file_size / 1024; // Get file size in KB
 //echo $file_size; // Echo file size
 
 $headers=get_headers("https://theperch.s3.amazonaws.com/2019-10-23_18-04.jpg");
 //print_r($headers);
-
 	
 //	$url = 'facebook.com';        
 $curl = curl_init($link);       
@@ -47,9 +46,17 @@ curl_close($curl);
     $element5 = $DOM->getElementsByTagName('h5');
     $element6 = $DOM->getElementsByTagName('h6');
     $meta = $DOM->getElementsByTagName('img');
-    
+	$script=$DOM->getElementsByTagName('script');    
     $items = array();
     $img_url=array();
+
+	foreach($script as $metatri){
+       
+      $script_src[] = $metatri->getAttribute('src');
+    
+    }
+
+
     foreach($meta as $metatri){
         
        $items[] = $metatri->getAttribute('alt'); 
@@ -321,11 +328,32 @@ if($len_links > 0){
     <div id="headingsix" class="collapse" aria-labelledby="headingsix1" data-parent="#accordionExample">
       <div class="card-body">
         <?php
+        $css=0;
+ 		$js=0;
+ 		$img=0;
+  function get_file_extension($file_name) {
+    return substr(strrchr($file_name,'.'),1);
+}
+
            $len_links=count($items_links);
            $len_linksrel= count($items_linksrel);
     //print_r($items_links);
     
     for ($i = 0; $i < $len_links; $i++) {
+
+$ext = get_file_extension($items_links[$i]);
+
+if($ext==='css'){
+$css++;
+}
+
+elseif($ext==='js'){
+$js++;
+}
+
+elseif($ext=== 'png' || $ext==='jpg'){
+$img++;
+}
 
         echo "<div class='container bg-light w-100'><h3 class='display3 '>".$i." Links rel Tags :-  " . $items_links[$i] . " <p><strong> Type</strong> :-".$items_linksrel[$i]." </p></h3></div>";
     }
@@ -334,34 +362,91 @@ if($len_links > 0){
     </div>
   </div>
 <?php } ?>
+
+
+<div class="card">
+    <div class="card-header" id="headingsix12">
+      <h2 class="mb-0 text-center">
+        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#headingsix58" aria-expanded="false" aria-controls="headingsix58">
+        	JavaScript Links
+        </button>
+      </h2>
+    </div>
+    <div id="headingsix58" class="collapse" aria-labelledby="headingsix12" data-parent="#accordionExample">
+      <div class="card-body">
+        <?php
+
+          $len= count($script_src);
+           for ($i = 0; $i < $len; $i++) {
+
+        echo "<div class='container bg-light w-100'><h3 class='display3 '>Heading 6".".".$i." :-  " . 
+        $script_src[$i] . "</h3></div>";
+    }
+        ?>
+      </div>
+    </div>
+  </div>
+
+
 </div>
+<?php
 
+echo $css;
+//echo $js;
+echo $img;
+
+?>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+       <form>
+          <div class="form-group">
+            <label for="recipient-name" class="col-form-label">Email:</label>
+            <input type="Email" class="form-control" placeholder="Enter Email" id="recipient-name" required="">
+          </div>
+          <div class="form-group">
+            <label for="message-text" class="col-form-label">Message:</label>
+            <input type="text" placeholder="Message..." class="form-control" id="recipient-name" required="">
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Submit</button>
+      </div>
+    </div>
+  </div>
+</div>
         <!-- Footer -->
-<footer class="page-footer font-small unique-color-dark pt-4">
-
+<footer class="page-footer font-small unique-color-dark pt-4" style="background-color: #809e9f52">
   <!-- Footer Elements -->
   <div class="container">
-
     <!-- Call to action -->
     <ul class="list-unstyled list-inline text-center py-2">
       <li class="list-inline-item">
         <h5 class="mb-1">Support Developer</h5>
       </li>
       <li class="list-inline-item">
-        <a href="#!" class="btn btn-outline-white btn-rounded">Sign up!</a>
+        <a  class="btn btn-outline-white btn-rounded" data-toggle="modal" data-target="#exampleModalCenter">Sign up!</a>
       </li>
     </ul>
     <!-- Call to action -->
-
   </div>
   <!-- Footer Elements -->
-
   <!-- Copyright -->
   <div class="footer-copyright text-center py-3">© 2020 Copyright:
-    <a href="https://mdbootstrap.com/"> Vishwakirti.Website</a>
+    <a href="https://www.linkedin.com/in/vishwakirti-sharma-91b394184/"> Vishwakirti.Website</a>
   </div>
   <!-- Copyright -->
-
 </footer>
 <!-- Footer -->
     </body>
