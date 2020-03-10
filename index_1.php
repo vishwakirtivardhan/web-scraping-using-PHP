@@ -4,23 +4,17 @@ if (isset($_POST['submit'])) {// submit btn
 $link = $_POST['url'];
 
 $headers=get_headers("$link");
-print_r($headers);
-die();
+//print_r($headers);
 
 $image_info = getimagesize("https://theperch.s3.amazonaws.com/2019-11-04_16-34-55.jpg"); 
 //print_r($image_info); 
 
-
-$file_size = filesize($_SERVER['DOCUMENT_ROOT']."https://theperch.s3.amazonaws.com/2019-11-04_16-34-55.jpg"); // Get file size in bytes
-$file_size = $file_size / 1024; // Get file size in KB
+//$file_size = filesize($_SERVER['DOCUMENT_ROOT']."https://theperch.s3.amazonaws.com/2019-11-04_16-34-55.jpg"); // Get file size in bytes
+//$file_size = $file_size / 1024; // Get file size in KB
 //echo $file_size; // Echo file size
 
 $headers=get_headers("https://theperch.s3.amazonaws.com/2019-10-23_18-04.jpg");
-print_r($headers);
-
-
-
-
+//print_r($headers);
 
 	
 //	$url = 'facebook.com';        
@@ -61,16 +55,32 @@ curl_close($curl);
        $items[] = $metatri->getAttribute('alt'); 
       $img_url[]= $metatri->getAttribute('src');
     }    
-    $len=count($img_url);
+    $lenimg_url=count($img_url);
+    $len_alt=count($items);
+    if ($lenimg_url==$len_alt) {
+    	
+    	$len=$len_alt;
+    }else{
+    	echo "<script> alert('Img not matched') </script>";
+    }
+
 
 
 $links= $DOM->getElementsByTagName('link');
     $items_links = array();
-    foreach($links as $metatri){
-        
+    foreach($links as $metatri){        
        $items_links[] = $metatri->getAttribute('href'); 
-       $items_linksrel[] = $metatri->getAttribute('rel'); 
-      
+       $items_linksrel[] = $metatri->getAttribute('rel');      
+    }
+
+    $altextVolume=0;
+    //$altarray=[];
+    $arraylen=0;
+    for ($i = 0; $i < $len; $i++){
+           	if($items[$i] == ''){
+    			$items[$i]='<strong class="text-danger">No Alt Att </strong>';
+    		$altextVolume++;
+    	}    
     }
   }  
 ?>
@@ -79,12 +89,18 @@ $links= $DOM->getElementsByTagName('link');
 <html>
     <head>
         <title>C-project</title>
+        <script src="js/jquery.min.js"></script>
+        <script src="js/bootstrap.bundle.js"></script>
+        <script src="js/bootstrap.bundle.min.js"></script>
+        <script src="js/bootstrap.js"></script>
+        <script src="js/bootstrap.min.js"></script>
         <!-- This is the bootstrap links--->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-        <!--end of Boostrap links-->
+        <link rel="stylesheet" href="css/bootstrap.css">
+        <link rel="stylesheet" href="css/bootstrap.min.css">
+        <link rel="stylesheet" href="css/bootstrap-grid.css">
+        <link rel="stylesheet" href="css/bootstrap-reboot.css">
+        <link rel="stylesheet" href="css/bootstrap-reboot.min.css">
+        <link rel="stylesheet" href="css/bootstrap-grid.min.css">
     	<style type="text/css">
     		.btn{
     			font-size: 30px;
@@ -186,12 +202,12 @@ if ($element->length > 0) {
   <div class="card">
     <div class="card-header" id="headingfour">
       <h2 class="mb-0 text-center">
-        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#headingfour" aria-expanded="false" aria-controls="headingfour">
+        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#headingfour1" aria-expanded="false" aria-controls="headingfour1">
         	Heading 4
         </button>
       </h2>
     </div>
-    <div id="headingfour" class="collapse" aria-labelledby="headingfour" data-parent="#accordionExample">
+    <div id="headingfour1" class="collapse" aria-labelledby="headingfour" data-parent="#accordionExample">
       <div class="card-body">
         <?php
            for ($i = 0; $i < $element4->length; $i++) {
@@ -204,14 +220,14 @@ if ($element->length > 0) {
   </div>
 <?php }  if($element5->length >0){ ?>
   <div class="card">
-    <div class="card-header" id="headingfive">
+    <div class="card-header" id="headingfive1">
       <h2 class="mb-0 text-center">
         <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#headingfive" aria-expanded="false" aria-controls="headingfive">
         	Heading 5
         </button>
       </h2>
     </div>
-    <div id="headingfive" class="collapse" aria-labelledby="headingfive" data-parent="#accordionExample">
+    <div id="headingfive" class="collapse" aria-labelledby="headingfive1" data-parent="#accordionExample">
       <div class="card-body">
         <?php
            for ($i = 0; $i < $element5->length; $i++) {
@@ -224,14 +240,14 @@ if ($element->length > 0) {
   </div>
   <?php } if($element6->length >0){ ?>
   <div class="card">
-    <div class="card-header" id="headingsix">
+    <div class="card-header" id="headingsix1">
       <h2 class="mb-0 text-center">
         <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#headingsix" aria-expanded="false" aria-controls="headingsix">
         	Heading 6
         </button>
       </h2>
     </div>
-    <div id="headingsix" class="collapse" aria-labelledby="headingsix" data-parent="#accordionExample">
+    <div id="headingsix" class="collapse" aria-labelledby="headingsix1" data-parent="#accordionExample">
       <div class="card-body">
         <?php
            for ($i = 0; $i < $element6->length; $i++) {
@@ -244,69 +260,65 @@ if ($element->length > 0) {
   </div>
 <?php } ?>
 <?php if($len > 0 ){ ?>
+
+
 <div class="card">
-    <div class="card-header" id="headingseven">
+    <div class="card-header" id="headingseven1">
       <h2 class="mb-0 text-center">
         <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#headingseven" aria-expanded="false" aria-controls="headingseven">
         	Alt Images Analysis
         </button>
       </h2>
     </div>
-    <div id="headingseven" class="collapse" aria-labelledby="headingseven" data-parent="#accordionExample">
+    <div id="headingseven" class="collapse" aria-labelledby="headingseven1" data-parent="#accordionExample">
       <div class="card-body">
         <?php
-    $altextVolume=0;
-    $altarray=[];
-    $arraylen=0;
-    for ($i = 0; $i < $len; $i++){
-
-           	if($items[$i] == ''){
-    		$altextVolume++;
-    	}
-    	else{
-    		$altarray[$arraylen]=$items[$i];
-    		$arraylen++;
-    	}
-        
-        //echo "<div class='container bg-light w-100'><h3 class='display3 text-center'>Images Alt Info :-  " . $element6->item(0)->nodeValue . "</h3></div>";
-    }
+    
 
     if($altextVolume > 0){
     	echo "<div class='container bg-light w-100'><h3 class='display3 text-center text-danger'>Total number of alt attribute Missing in the Image:-" . $altextVolume . "</h3></div>";
-    //echo  'Total number of alt attribute Missing in the Image'.$altextVolume;
-    }
-    $lenghtaltarray=count($altarray);
-    for($i=0;$i < $lenghtaltarray;$i++){
-
-    	echo "<div class='container bg-light w-100'><h3 class='display3 '>Image alt attribute".".".$i." :-  " . $altarray[$i] . "</h3></div>";
-
-    }
-
-    $imgLenUrl=count($img_url);
-    for($i=0;$i < $imgLenUrl;$i++){
-
     
-    	echo "<div class='container bg-light w-100'><h3 class='display3 '>Image SRC attribute".".".$i." :-  " . $img_url[$i] . "</h3></div>";
-
     }
+   
+    for($i=0;$i < $len;$i++){
+    
+//     $altatt;	
+// if($altarray[$i]==''){
+// $altatt='<strong> No Alt tag </strong>';
+// }
+// else{
+// $altatt= $altarray[$i];
+// }
+
+    	//echo "<img src=". $img_url[$i] ." style='width:50px;height:50px;'/>";
+    	echo "<h2>".$i."  </<h2>";
+    
+    	echo "<div class='container bg-light w-100'><h3 class='display3 '>Image Alt Attr :- ".$items[$i] ."</h3></div>";
+
+
+    	echo "<div class='container bg-light w-100'><h3 class='display3 '>Image SRC :- " . $img_url[$i] . "</h3></div>";
+    }
+    
         ?>
       </div>
     </div>
   </div>
+
   <?php 
 }
+
 $len_links=count($items_links);
 if($len_links > 0){
    ?>
    <div class="card">
-    <div class="card-header" id="headingsix">
+    <div class="card-header" id="headingsix1">
       <h2 class="mb-0 text-center">
         <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#headingsix" aria-expanded="false" aria-controls="headingsix">
         	Total Number of the External Links
         </button>
       </h2>
     </div>
-    <div id="headingsix" class="collapse" aria-labelledby="headingsix" data-parent="#accordionExample">
+    <div id="headingsix" class="collapse" aria-labelledby="headingsix1" data-parent="#accordionExample">
       <div class="card-body">
         <?php
            $len_links=count($items_links);
