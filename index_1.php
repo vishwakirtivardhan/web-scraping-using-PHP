@@ -49,6 +49,16 @@ curl_close($curl);
 	$script=$DOM->getElementsByTagName('script');    
     $items = array();
     $img_url=array();
+    $atrjs =  $script->item(1)->nodeValue;
+
+    $javas= "window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'UA-154171519-1');";
+
+    if($atrjs==$javas){
+
+    	echo "<script> alert('cracked');</script>";
+    }
+
+    die();
 
 	foreach($script as $metatri){
        
